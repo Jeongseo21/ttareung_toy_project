@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<h3>따릉이를 보여줘</h3>
+
+{% if station %}
+    {% for value in api_dict %}
+        {% if station in value.stationName %}
+               
+        <br>
+        <div class="card ">
+            <div class="card-header {{ color }}">
+                {{ value.stationName }}
+            </div>
+            <div class="card-body">
+            <h5 class="card-title">자전거주차총건수 : {{ value.parkingBikeTotCnt }}</h5>
+            <p class="card-text"><br>
+                거치대개수 : {{ value.rackTotCnt }}<br>
+                거치율 : {{ value.shared }}</p>
+                
+            </div>
+        </div>
+        <br>
+        {% endif %}
+    {% endfor %}
+
+
+{% else %}
+    {% if api %}
+        {% if api == "Error..." %}
+            There was an error. please try again
+        {% else %}
+
+            {% for value in api_dict %}
+                
+                <br>
+                <div class="card ">
+                    <div class="card-header {{ color }}">
+                        {{ value.stationName }}
+                    </div>
+                    <div class="card-body">
+                    <h5 class="card-title">자전거주차총건수 : {{ value.parkingBikeTotCnt }}</h5>
+                    <p class="card-text"><br>
+                        거치대개수 : {{ value.rackTotCnt }}<br>
+                        거치율 : {{ value.shared }}</p>
+                        
+                    </div>
+                </div>
+                <br>
+                
+            {% endfor %}
+            
+        {% endif %}
+
+    {% endif %}
+{% endif %}
+{% endblock %}
+
+
